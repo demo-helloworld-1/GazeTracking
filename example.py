@@ -1,13 +1,12 @@
-"""
-Demonstration of the GazeTracking library.
-Check the README.md for complete documentation.
-"""
-
 import cv2
 from gaze_tracking import GazeTracking
 
 gaze = GazeTracking()
 webcam = cv2.VideoCapture(0)
+
+# Set the frame size
+webcam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # Set width to 1280 pixels
+webcam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)  # Set height to 720 pixels
 
 while True:
     # We get a new frame from the webcam
@@ -37,8 +36,9 @@ while True:
 
     cv2.imshow("Demo", frame)
 
-    if cv2.waitKey(1) == 27:
+    # Check if 'q' is pressed to exit
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-   
+
 webcam.release()
 cv2.destroyAllWindows()
